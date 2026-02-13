@@ -1,0 +1,1 @@
+Programa simples para validar via API a posição da Estação Espacial Internacional e comparar com as coordenadas inseridas, enviando um email caso a ISS esteja passando na região das coordenadas.

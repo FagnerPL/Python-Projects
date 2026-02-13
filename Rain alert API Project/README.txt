@@ -1,0 +1,1 @@
+Através da API da Open Weather Map, traz informações sobre o clima de uma região através das coordenadas. Com essas informações, valida se vai chover na região. Com a API da Twilio manda uma mensagem via SMS ou WhatsApp para o número do celular.
