@@ -5,9 +5,9 @@ from email.mime.text import MIMEText
 from email.header import Header
 
 
-EMAIL = "fagner.lira96@gmail.com"
-DEST = 'gustavo.jornada@hotmail.com'
-PASS = "boeu kxch lncl oewd"
+EMAIL = ""
+DEST = ''
+PASS = ""
 
 with open("phrases.txt") as file:
     data = file.readlines()
