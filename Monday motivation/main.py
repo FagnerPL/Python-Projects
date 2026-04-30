@@ -4,10 +4,16 @@ import random
 from email.mime.text import MIMEText
 from email.header import Header
 
+from dotenv import load_dotenv
+import os
 
-EMAIL = ""
-DEST = ''
-PASS = ""
+load_dotenv()
+
+DEST = os.environ.get("DEST")
+PASS = os.environ.get("PASS")
+
+if not EMAIL or not DEST or not PASS:
+    raise ValueError("Missing environment variables. Check your .env file")
 
 with open("phrases.txt") as file:
     data = file.readlines()

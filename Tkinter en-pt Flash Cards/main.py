@@ -12,7 +12,7 @@ rand_word = {}
 try:
     data = pd.read_csv("data/words_to_learn.csv")
 except FileNotFoundError:
-    data = pd.read_csv("data/english words.csv")
+    data = pd.read_csv("data/english_words.csv")
     dict_words = data.to_dict(orient="records")
 else:
     dict_words = data.to_dict(orient="records")
@@ -27,7 +27,7 @@ def next_card():
         rand_word = random.choice(dict_words)
     except IndexError:
         if messagebox.askyesno(title="Cards Ends", message="You finish all the cards available. Do you want start again?"):
-            data = pd.read_csv("data/english words.csv")
+            data = pd.read_csv(pathlib.Path("data/english_words.csv"))
             dict_words = data.to_dict(orient="records")
             next_card()
         else:
@@ -77,7 +77,7 @@ known_button = tk.Button(image=right_img, highlightthickness=0, border=0, text="
 known_button.grid(column=1, row= 2)
 
 wrong_img = tk.PhotoImage(file="images/wrong.png")
-unknown_button = tk.Button(image=wrong_img, highlightthickness=0, border=0, text="Right", command=next_card)
+unknown_button = tk.Button(image=wrong_img, highlightthickness=0, border=0, text="Wrong", command=next_card)
 unknown_button.grid(column=0, row= 2)
 
 next_card()

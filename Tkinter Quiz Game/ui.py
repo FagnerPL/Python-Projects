@@ -28,11 +28,11 @@ class QuizInterface:
         self.score.grid(column=1, row=0)
 
         #Buttons
-        right_image = PhotoImage(file=R_IMAGE)
-        self.true_button = Button(image=right_image, border=0, bg=THEME_COLOR, command=self.true_answer)
+        self.right_image = PhotoImage(file=R_IMAGE)
+        self.true_button = Button(image=self.right_image, border=0, bg=THEME_COLOR, command=self.true_answer)
         self.true_button.grid(column=0, row=2)
-        wrong_image = PhotoImage(file=W_IMAGE)
-        self.false_button = Button(image=wrong_image, bg=THEME_COLOR, border=0, command=self.false_answer)
+        self.wrong_image = PhotoImage(file=W_IMAGE)
+        self.false_button = Button(image=self.wrong_image, bg=THEME_COLOR, border=0, command=self.false_answer)
         self.false_button.grid(column=1, row=2)
 
         self.next_question()
@@ -46,7 +46,13 @@ class QuizInterface:
             q_text = self.quiz.next_question()
             self.canvas.itemconfig(self.question, text=q_text)
         else:
-            self.canvas.itemconfig(self.question, text="You've reached the of the quizz")
+            self.canvas.itemconfig(
+                self.question, 
+                text=f"You've reached the end of the quiz!\n\n"
+                f"Final Score: {self.quiz.score}/{self.quiz.question_number}\n\n"
+                f"{'Well done! 🎉' if self.quiz.score >= 7 else 'Keep practicing! 💪'}"
+            )
+            self.canvas.config(bg="white")
             self.true_button.config(state="disabled")
             self.false_button.config(state="disabled")
 
@@ -63,6 +69,3 @@ class QuizInterface:
             self.canvas.config(bg="red")
 
         self.window.after(1000, self.next_question)
-
-
-

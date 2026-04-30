@@ -20,7 +20,8 @@ def rand_password():
     new_password = rand_symbols + rand_numbers + rand_letters
     shuffle(new_password)
 
-    password_entry.insert(0, f"{"".join(new_password)}")
+    password_entry.delete(0, END)
+    password_entry.insert(0, "".join(new_password))
 
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
@@ -66,7 +67,7 @@ def find_password():
     try:
         with open("data.json", "r") as file:
             data = json.load(file)
-        messagebox.showinfo(website, f"Email: {data[website]["email"]}\nPassword: {data[website]["password"]}")
+        messagebox.showinfo(website, f"Email: {data[website]['email']}\nPassword: {data[website]['password']}")
     except (KeyError, FileNotFoundError):
         messagebox.showinfo("Error", "No Data File Found")
 
@@ -98,7 +99,7 @@ website_entry.focus()
 website_entry.grid(row=1, column=1)
 
 email_entry = Entry(width=51)
-email_entry.insert(0, "fagner@email.com")
+email_entry.insert(0, "example@email.com")
 email_entry.grid(row=2, column=1, columnspan=2)
 
 password_entry = Entry(width=33)

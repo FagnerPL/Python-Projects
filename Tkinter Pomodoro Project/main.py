@@ -21,17 +21,19 @@ timer = None
 
 def reset_timer():
     global reps
-    window.after_cancel(timer)
+    if timer is not None:
+        window.after_cancel(timer)
     main_label.config(text="TIMER")
     canvas.itemconfig(timer_text, text="00:00")
     check_label.config(text="")
+    start_button.config(state="normal")
     reps = 0
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_time():
     global reps
     reps += 1
-    print(reps)
+    start_button.config(state="disable")
 
     if reps % 8 == 0:
         count_down(LONG_BREAK_MIN * 60)
@@ -52,8 +54,6 @@ def count_down(count):
 
     count_min = math.floor(count / 60)
     count_sec = count % 60
-    if count_sec == 0:
-        count_sec = "00"
 
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec:02}")
     if count > 0:
@@ -75,7 +75,6 @@ tomato_img = PhotoImage(file=IMAGE_PATH)
 canvas.create_image(100, 112, image=tomato_img)
 timer_text = canvas.create_text(100, 130, text="00:00", fill="white", font=(FONT_NAME, 35, "bold"))
 canvas.grid(column=1, row=1)
-print(os.getcwd())
 
 #Labels
 main_label = Label(text="TIMER", fg=GREEN, bg=YELLOW, font=(FONT_NAME, 50))
